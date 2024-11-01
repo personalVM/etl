@@ -19,12 +19,12 @@ data_loc <- function(
   # rm(list = ls())
   gc()
   options(scipen = 666, stringsAsFactors = F)
-  # source("src/util_loadPackages.R")
+  source("volume/etl/util_loadPackages.R")
   
   if(use_backup==T){
     
     # Read back df_locatons.csv data
-    res <- readr::read_csv("data/clean_data/munic/df_locations_mun.csv") %>% 
+    res <- readr::read_csv("volume/data/curated_data/munic/df_locations_mun.csv") %>% 
       suppressMessages()
     
   } else if(use_backup==F){

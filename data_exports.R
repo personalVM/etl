@@ -16,7 +16,7 @@ data_exports <- function(grouped_by="micro"){
   df_locations <- data_loc()
   
   # Loading exp data
-  exp <- vroom::vroom(file = "data/clean_data/munic/EXP_COMPLETA_MUN.csv") %>% 
+  exp <- vroom::vroom(file = "volume/data/clean_data/munic/EXP_COMPLETA_MUN.csv") %>% 
     janitor::clean_names() %>% 
     dplyr::select(cd_mun=co_mun, year=co_ano, sg_uf=sg_uf_mun, cd_sh4=sh4, exports=vl_fob) %>% 
     dplyr::mutate(
@@ -66,81 +66,76 @@ data_exports <- function(grouped_by="micro"){
     dplyr::left_join(., exp_sh4) %>% 
     dplyr::arrange(desc(exports))
 
-  if(grouped_by == "mun"){
-    exp_mun_plus %>% 
-      dplyr::select(-cd_micro, -nm_micro, -cd_meso, -nm_meso, -cd_uf, -sg_uf, -nm_uf, -cd_reg, -sg_reg, -nm_reg, -cd_rgime, -nm_rgime, -cd_rgint, -nm_rgint) %>% 
-      rio::export(., "data/curated_data/munic/df_exports_mun.csv")
-  }else
-    if(grouped_by == "micro"){
-      exp_mun_plus %>% 
-        dplyr::group_by(cd_micro, year) %>% 
-        dplyr::summarise(
-          across(
-            .cols = starts_with("exports"),
-            .fns = sum
-          ), .groups = "drop"
-        ) %>% 
-        rio::export(., "data/curated_data/micro/df_exports_micro.csv")
-    }else
-      if(grouped_by == "meso"){
-        exp_mun_plus %>% 
-          dplyr::group_by(cd_meso, year) %>% 
-          dplyr::summarise(
-            across(
-              .cols = starts_with("exports"),
-              .fns = sum
-            ), .groups = "drop"
-          ) %>% 
-          rio::export(., "data/curated_data/meso/df_exports_meso.csv")
-      }else
-        if(grouped_by == "rgime"){
-          exp_mun_plus %>% 
-            dplyr::group_by(cd_rgime, year) %>% 
-            dplyr::summarise(
-              across(
-                .cols = starts_with("exports"),
-                .fns = sum
-              ), .groups = "drop"
-            ) %>% 
-            rio::export(., "data/curated_data/rgime/df_exports_rgime.csv")
-        }else
-          if(grouped_by == "rgint"){
-            exp_mun_plus %>% 
-              dplyr::group_by(cd_rgint, year) %>% 
-              dplyr::summarise(
-                across(
-                  .cols = starts_with("exports"),
-                  .fns = sum
-                ), .groups = "drop"
-              ) %>% 
-              rio::export(., "data/curated_data/rgint/df_exports_rgint.csv")
-          }else
-            if(grouped_by == "uf"){
-              exp_mun_plus %>% 
-                dplyr::group_by(sg_uf, year) %>% 
-                dplyr::summarise(
-                  across(
-                    .cols = starts_with("exports"),
-                    .fns = sum
-                  ), .groups = "drop"
-                ) %>% 
-                rio::export(., "data/curated_data/uf/df_exports_uf.csv")
-            }else
-              if(grouped_by == "rg"){
-                exp_mun_plus %>% 
-                  dplyr::group_by(sg_reg, year) %>% 
-                  dplyr::summarise(
-                    across(
-                      .cols = starts_with("exports"),
-                      .fns = sum
-                    ), .groups = "drop"
-                  ) %>% 
-                  rio::export(., "data/curated_data/regions/df_exports_regions.csv")
-              }
-
+  # Munic:
+  exp_mun_plus %>% 
+    dplyr::select(-cd_micro, -nm_micro, -cd_meso, -nm_meso, -cd_uf, -sg_uf, -nm_uf, -cd_reg, -sg_reg, -nm_reg, -cd_rgime, -nm_rgime, -cd_rgint, -nm_rgint) %>% 
+    rio::export(., "volume/data/curated_data/munic/df_exports_mun.csv")
   
+  # Micro:
+  exp_mun_plus %>% 
+    dplyr::group_by(cd_micro, year) %>% 
+    dplyr::summarise(
+      across(
+        .cols = starts_with("exports"),
+        .fns = sum
+      ), .groups = "drop"
+    ) %>% 
+    rio::export(., "volume/data/curated_data/micro/df_exports_micro.csv")
   
-  return(exp)
+  # Meso:
+  exp_mun_plus %>% 
+    dplyr::group_by(cd_meso, year) %>% 
+    dplyr::summarise(
+      across(
+        .cols = starts_with("exports"),
+        .fns = sum
+      ), .groups = "drop"
+    ) %>% 
+    rio::export(., "volume/data/curated_data/meso/df_exports_meso.csv")
+  
+  # Rgime:
+  exp_mun_plus %>% 
+    dplyr::group_by(cd_rgime, year) %>% 
+    dplyr::summarise(
+      across(
+        .cols = starts_with("exports"),
+        .fns = sum
+      ), .groups = "drop"
+    ) %>% 
+    rio::export(., "volume/data/curated_data/rgime/df_exports_rgime.csv")
+  
+  # Rgint:
+  exp_mun_plus %>% 
+    dplyr::group_by(cd_rgint, year) %>% 
+    dplyr::summarise(
+      across(
+        .cols = starts_with("exports"),
+        .fns = sum
+      ), .groups = "drop"
+    ) %>% 
+    rio::export(., "volume/data/curated_data/rgint/df_exports_rgint.csv")
+  
+  # UF:
+  exp_mun_plus %>% 
+    dplyr::group_by(sg_uf, year) %>% 
+    dplyr::summarise(
+      across(
+        .cols = starts_with("exports"),
+        .fns = sum
+      ), .groups = "drop"
+    ) %>% 
+    rio::export(., "volume/data/curated_data/uf/df_exports_uf.csv")
+  
+  # RG:
+  exp_mun_plus %>% 
+    dplyr::group_by(sg_reg, year) %>% 
+    dplyr::summarise(
+      across(
+        .cols = starts_with("exports"),
+        .fns = sum
+      ), .groups = "drop"
+    ) %>% 
+    rio::export(., "volume/data/curated_data/regions/df_exports_regions.csv")
   
 }
 
