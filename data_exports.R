@@ -11,8 +11,8 @@
 data_exports <- function(grouped_by="micro"){
   
   # Getting BR location info
-  source("BRdb/modules/compute/scripts/util_loadPackages.R")
-  source("BRdb/modules/compute/scripts/data_locations.R")
+  source("volume/etl/util_loadPackages.R")
+  source("volume/etl/data_locations.R")
   df_locations <- data_loc()
   
   # Loading exp data
