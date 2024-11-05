@@ -23,8 +23,8 @@ data_loc <- function(
   
   if(use_backup==T){
     
-    # Read back df_locatons.csv data
-    res <- readr::read_csv("volume/data/curated_data/munic/df_locations_mun.csv") %>% 
+    # Read back df_locatons_mun.csv data
+    res <- readr::read_csv("volume/data/clean_data/munic/df_locations_mun.csv") %>% 
       suppressMessages()
     
   } else if(use_backup==F){
