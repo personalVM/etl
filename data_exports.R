@@ -13,7 +13,10 @@ data_exports <- function(grouped_by="micro"){
   # Getting BR location info
   source("volume/etl/util_loadPackages.R")
   source("volume/etl/data_locations.R")
-  df_locations <- data_loc()
+
+  df_locations <- readr::read_csv(paste0("volume/data/curated_data/munic/df_locations_", grouped_by, ".csv")) %>% 
+    dplyr::mutate(dplyr::across(everything(), as.character)) %>% 
+    suppressMessages()
   
   # Loading exp data
   exp <- vroom::vroom(file = "volume/data/clean_data/munic/EXP_COMPLETA_MUN.csv") %>% 

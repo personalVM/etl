@@ -8,12 +8,12 @@
 data_imig <- function(grouped_by="micro"){
   
   # Getting BR location info
-  source("util_loadPackages.R")
-  source("data_locations.R")
+  source("volume/etl/util_loadPackages.R")
+  source("volume/etl/data_locations.R")
   df_locations <- data_loc()
   
   if(grouped_by == "mun"){
-    df_imig <- readr::read_tsv("clean_bucket/munic/tabela2145_imig_mun.tsv") %>%
+    df_imig <- readr::read_tsv("volume/data/clean_data/munic/tabela2145_imig_mun.tsv") %>%
       janitor::clean_names(.) %>% 
       dplyr::mutate(across(everything(), ~ replace(., . == "-", "0"))) %>%
       dplyr::mutate(immigrants=as.numeric(total)) %>%
@@ -21,10 +21,10 @@ data_imig <- function(grouped_by="micro"){
       dplyr::arrange(desc(immigrants)) %>%
       suppressMessages() %>% 
       suppressWarnings()
-    rio::export(df_imig, "curated_bucket/munic/df_immigrants.csv")
+    rio::export(df_imig, "volume/data/curated_data/munic/df_immigrants.csv")
   }else
     if(grouped_by == "micro"){
-        df_imig <- readr::read_tsv("clean_bucket/micro/tabela2145_imig_micro.tsv") %>%
+        df_imig <- readr::read_tsv("volume/data/clean_data/micro/tabela2145_imig_micro.tsv") %>%
           janitor::clean_names(.) %>% 
           dplyr::mutate(across(everything(), ~ replace(., . == "-", "0"))) %>%
           dplyr::mutate(immigrants=as.numeric(total)) %>%
@@ -32,11 +32,8 @@ data_imig <- function(grouped_by="micro"){
           dplyr::arrange(desc(immigrants)) %>%
           suppressMessages() %>% 
           suppressWarnings()
-        rio::export(df_imig, "curated_bucket/micro/df_immigrants.csv")
+        rio::export(df_imig, "volume/data/curated_data/micro/df_immigrants.csv")
     }
-
-
-  return(df_imig)
 
 }
 
