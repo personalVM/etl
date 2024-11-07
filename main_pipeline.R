@@ -21,22 +21,14 @@ source("volume/etl/data_diversity.R")
 # source("fct_corMatrix.R")
 
 # Main -------------------------------------------------------------------
-data_locations(grouped_by = "mun")
+data_locations(grouped_by = "munic")
 data_locations(grouped_by = "micro")
 
-data_emig(grouped_by = "mun")
+data_emig(grouped_by = "munic")
 data_emig(grouped_by = "micro")
 
-data_exports(grouped_by = "mun")
+data_exports(grouped_by = "munic")
 data_exports(grouped_by = "micro")
 
 data_imig(grouped_by = "mun")
 data_imig(grouped_by = "micro")
-
-
-
-
-
-
-
-
