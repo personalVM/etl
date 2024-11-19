@@ -6,10 +6,14 @@
 
 # data_imig function ---------------------------------------------------
 data_imig <- function(grouped_by = "micro") {
+  
   # Getting BR location info
   source("volume/etl/util_loadPackages.R")
   source("volume/etl/data_locations.R")
-  df_locations <- data_loc()
+  
+  df_locations <- readr::read_csv(paste0("volume/data/curated_data/", grouped_by, "/df_locations_", grouped_by, ".csv")) %>%
+    dplyr::mutate(dplyr::across(everything(), as.character)) %>%
+    suppressMessages()
 
   if (grouped_by == "mun") {
     df_imig <- readr::read_tsv("volume/data/clean_data/munic/tabela2145_imig_mun.tsv") %>%

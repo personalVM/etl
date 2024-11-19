@@ -12,18 +12,24 @@ data_diversity <- function(input_filter = 0, grouped_by = "micro") {
   gc()
   options(scipen = 666, stringsAsFactors = F)
   source("volume/etl/util_loadPackages.R")
-  source("volume/etl/data_locations.R")
-  source("volume/etl/data_exports.R")
 
   # Getting BR location info
-  df_locations <- readr::read_csv(paste0("volume/data/curated_bucket/munic/df_locations_", grouped_by, ".csv")) %>%
+  df_locations <- readr::read_csv(paste0("volume/data/curated_data/", grouped_by, "/df_locations_", grouped_by, ".csv")) %>%
+    dplyr::mutate(dplyr::across(everything(), as.character)) %>%
     suppressMessages()
 
   # Loading exports data
-  df_exp <- readr::read_csv(paste0("volume/data/curated_bucket/munic/df_exports_", grouped_by, ".csv")) %>%
-    suppressMessages()
+  df_exp <- readr::read_csv(paste0("volume/data/curated_data/", grouped_by, "/df_exports_", grouped_by, ".csv")) %>%
+    suppressMessages() %>%
+    { if ("cd_munic" %in% names(.)) 
+      mutate(., cd_munic = as.character(cd_munic), year=as.character(year)) 
+      else if ("cd_micro" %in% names(.)) 
+        mutate(., cd_micro = as.character(cd_micro), year=as.character(year)) 
+      else
+        . 
+    }
 
-  df_expl <- left_join(br_loc, df_exp) %>%
+  df_expl <- left_join(df_locations, df_exp) %>%
     mutate(exp = ifelse(is.na(exp), 1, exp))
 
   if (grouped_by == "mun") {
