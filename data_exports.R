@@ -9,7 +9,6 @@
 
 # data_exports function ---------------------------------------------------
 data_exports <- function(grouped_by = "micro") {
-  
   df_locations <- readr::read_csv(paste0("volume/data/curated_data/munic/df_locations_munic.csv")) %>%
     dplyr::mutate(dplyr::across(everything(), as.character)) %>%
     suppressMessages()

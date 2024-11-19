@@ -35,7 +35,8 @@ data_emig <- function(grouped_by = "micro") {
     df_emig <- df_locations %>%
       dplyr::left_join(., df_emig1497) %>%
       dplyr::left_join(., df_emig3173) %>%
-      dplyr::arrange(desc(inhabitants))
+      dplyr::arrange(desc(inhabitants)) %>%
+      dplyr::select(-nm_munic, -cd_micro, -nm_micro, -cd_meso, -nm_meso, -cd_rgime, -nm_rgime, -cd_rgint, -nm_rgint, -cd_state, -sg_state, -nm_state, -cd_region, -sg_region, -nm_region)
     rio::export(df_emig, "volume/data/curated_bucket/munic/df_emigrants_munic.csv")
   } else if (grouped_by == "micro") {
     df_emig3173 <- readr::read_tsv("volume/data/clean_data/micro/tabela3173_emig_micro.tsv") %>%
@@ -59,7 +60,8 @@ data_emig <- function(grouped_by = "micro") {
       dplyr::select(cd_micro, nm_micro, cd_meso, nm_meso, cd_state, sg_state, nm_state, cd_region, sg_region, nm_region) %>%
       dplyr::left_join(., df_emig1497) %>%
       dplyr::left_join(., df_emig3173) %>%
-      dplyr::arrange(desc(inhabitants))
+      dplyr::arrange(desc(inhabitants)) %>%
+      dplyr::select(-nm_micro, -cd_meso, -nm_meso, -cd_state, -sg_state, -nm_state, -cd_region, -sg_region, -nm_region)
     rio::export(df_emig, "volume/data/curated_data/micro/df_emigrants_micro.csv")
   }
 }
