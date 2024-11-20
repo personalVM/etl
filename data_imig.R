@@ -14,7 +14,7 @@ data_imig <- function(grouped_by = "micro") {
     dplyr::mutate(dplyr::across(everything(), as.character)) %>%
     suppressMessages()
 
-  if (grouped_by == "mun") {
+  if (grouped_by == "munic") {
     df_imig <- readr::read_tsv("volume/data/clean_data/munic/tabela2145_imig_mun.tsv") %>%
       janitor::clean_names(.) %>%
       dplyr::mutate(across(everything(), ~ replace(., . == "-", "0"))) %>%
