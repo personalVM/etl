@@ -6,6 +6,9 @@
 
 # Setup -------------------------------------------------------------------
 
+getwd()
+setwd("/home/rstudio/")
+
 # rm(list = ls())
 gc()
 options(scipen = 666, stringsAsFactors = F)
