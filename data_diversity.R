@@ -42,7 +42,7 @@ data_diversity <- function(input_filter = 0, grouped_by = "micro") {
   df_expl <- left_join(df_locations, df_exp) %>%
     mutate(exp = ifelse(is.na(exp), 0, exp))
 
-  if (grouped_by == "mun") {
+  if (grouped_by == "munic") {
     df_exp1 <- df_expl %>%
       group_by(cd_mun, sh4) %>%
       mutate(x_rp = sum(exp, na.rm = T)) %>%
@@ -180,4 +180,4 @@ data_diversity <- function(input_filter = 0, grouped_by = "micro") {
   return(df_exp1)
 }
 
-data_diversidade(grouped_by = "micro")
+# data_diversidade(grouped_by = "micro")
