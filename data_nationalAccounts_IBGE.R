@@ -18,7 +18,7 @@ data_nationalAccounts_IBGE <- function(grouped_by="micro"){
   
   # Table 21 - DEPRECATED for now.
   
-  df_nationalAccounts <- readr::read_tsv("volume/data/clean_data/munic/tabela5938_nationalAccounts_micro.tsv") %>%
+  df_nationalAccounts <- readr::read_tsv("volume/data/clean_data/micro/tabela5938_nationalAccounts_micro.tsv") %>%
     stats::setNames(c("cd_micro", "nm_micro", "year", "gdp", "taxes", "addedValue", "addedValue_agriculture", "addedValue_industry",	"addedValue_services",	"addedValue_government")) %>% 
     # dplyr::mutate(dplyr::across(everything(), ~ replace(., . == "X", "0"))) %>%
     # dplyr::mutate(dplyr::across(everything(), ~ replace(., . == "-", "0"))) %>%
