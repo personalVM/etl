@@ -19,6 +19,7 @@ source("volume/etl/data_area.R")
 source("volume/etl/data_distCoast.R")
 source("volume/etl/data_education.R")
 source("volume/etl/data_labor_CEMPRE_IBGE.R")
+source("volume/etl/data_nationalAccounts_IBGE.R")
 
 # source("fct_createDF.R")
 # source("fct_global.R")
@@ -29,28 +30,31 @@ source("volume/etl/data_labor_CEMPRE_IBGE.R")
 data_locations(grouped_by = "munic")
 data_locations(grouped_by = "micro")
 
-data_emig(grouped_by = "munic")
+data_emig(grouped_by = "munic") # join migrations
 data_emig(grouped_by = "micro")
-
-data_exports(grouped_by = "munic")
-data_exports(grouped_by = "micro")
-
 data_imig(grouped_by = "munic")
 data_imig(grouped_by = "micro")
+
+data_exports(grouped_by = "munic")
+data_exports(grouped_by = "micro") 
 
 data_area(grouped_by = "munic") # TODO: fix warning:
 data_area(grouped_by = "micro")
 
-data_distCoast(grouped_by="munic")
+data_distCoast(grouped_by="munic") # other distances here also
 data_distCoast(grouped_by="micro")
 
 data_education(grouped_by="munic")
 data_education(grouped_by="micro")
 
+
+# There is more to be developed
+# Other years?
+# get data directly in micro form?
+# Oportunity: mean size of firms in BR, as by deviding firms by labor
 data_labor_CEMPRE_IBGE(grouped_by = "munic")
 data_labor_CEMPRE_IBGE(grouped_by = "micro")
 
-# Oportunity:
-# mean size of firms in BR, as by deviding firms by labor
-
+# data_nationalAccounts_IBGE(grouped_by = "munic")
+data_nationalAccounts_IBGE(grouped_by = "micro")
 
