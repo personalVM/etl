@@ -18,7 +18,8 @@ data_area <- function(grouped_by = "micro") {
   df_area$area <- df_area$area / 1000
   df_area <- df_area %>% sf::st_drop_geometry()
 
-  return(df_area)
+  rio::export(df_area, "volume/data/curated_data/micro/df_area_micro.csv")
+  
 }
 
 # data_area()

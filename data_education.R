@@ -44,6 +44,3 @@ data_education <- function(grouped_by="micro"){
 }
 
 
-# data_education()
-
-

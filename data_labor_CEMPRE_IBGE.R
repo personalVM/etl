@@ -55,8 +55,6 @@ data_labor_CEMPRE_IBGE <- function(grouped_by="micro"){
     suppressMessages() %>%
     suppressWarnings()
   
-  
-  
   df_ratio <- dplyr::inner_join(df_laborwsalary, df_salary, by = c("cd_munic", "year")) %>% 
     dplyr::mutate(
       dplyr::across(

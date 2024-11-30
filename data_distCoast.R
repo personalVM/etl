@@ -67,7 +67,7 @@ data_distCoast <- function(grouped_by="micro"){
     select(cd_micro, dist_coast) %>%
     mutate(dist_coast = (as.integer(dist_coast)/1000)/1000) # Thousand Kilometers units
   
-  return(df_dcoast)
+  rio::export(df_dcoast, "volume/data/curated_data/micro/df_dcoast_micro.csv")
   
 }
 

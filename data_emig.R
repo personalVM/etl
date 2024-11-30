@@ -76,13 +76,6 @@ data_emig <- function(grouped_by = "micro") {
 #   labs(title = "Total Imigration by Micro-Region", x = "Micro-Region", y = "Total Imigration") +
 #   theme_minimal()
 
-
-
-
-
-
-
-
 # ggplot(df_emig[1:10, ], aes(x = reorder(nm_micro, emig_total), y = emig_total)) +
 #   geom_bar(stat = "identity") +
 #   coord_flip() +
