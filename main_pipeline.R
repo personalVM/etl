@@ -19,7 +19,7 @@ source("volume/etl/data_exports.R")
 source("volume/etl/data_imig.R")
 source("volume/etl/data_diversity.R")
 source("volume/etl/data_area.R")
-source("volume/etl/data_distCoast.R")
+source("volume/etl/data_distance.R")
 source("volume/etl/data_education.R")
 source("volume/etl/data_labor_CEMPRE_IBGE.R")
 source("volume/etl/data_nationalAccounts_IBGE.R")
@@ -45,7 +45,7 @@ data_area(grouped_by = "micro")
 # Other distances in the same function:
 # Distance to SP, DF, to the closest capital city, distance from the borders.
 # data_distCoast(grouped_by="munic") # other distances here also
-data_distCoast(grouped_by="micro")
+data_distance(grouped_by="micro")
 
 data_education(grouped_by="munic")
 data_education(grouped_by="micro")

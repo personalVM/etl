@@ -9,7 +9,7 @@
 # rm(list = ls())
 
 # Function ----------------------------------------------------------------
-data_distCoast <- function(grouped_by="micro"){
+data_distance <- function(grouped_by="micro"){
   
   source("volume/etl/fct_centAsCols.R")
   
@@ -65,10 +65,18 @@ data_distCoast <- function(grouped_by="micro"){
     st_drop_geometry(.) %>%
     as.data.frame(.) %>%
     select(cd_micro, dist_coast) %>%
-    mutate(dist_coast = (as.integer(dist_coast)/1000)/1000) # Thousand Kilometers units
+    # mutate(dist_coast = (as.integer(dist_coast)/1000)/1000) %>%  # Thousand Kilometers units
+    mutate(dist_coast = as.integer(dist_coast)/1000) %>%  # Kilometers units
+    mutate(
+      is_coastal_10km = ifelse(dist_coast <= 10, 1, 0),
+      is_coastal_50km = ifelse(dist_coast <= 50, 1, 0),
+      is_coastal_80km = ifelse(dist_coast <= 80, 1, 0),
+      is_coastal_100km = ifelse(dist_coast <= 100, 1, 0),
+      is_coastal_200km = ifelse(dist_coast <= 200, 1, 0)
+    )
   
   rio::export(df_dcoast, "volume/data/curated_data/micro/df_dcoast_micro.csv")
   
 }
 
-# data_distCoast()
+# data_distance()
