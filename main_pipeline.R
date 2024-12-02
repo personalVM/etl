@@ -24,6 +24,7 @@ source("volume/etl/data_education.R")
 source("volume/etl/data_labor_CEMPRE_IBGE.R")
 source("volume/etl/data_nationalAccounts_IBGE.R")
 source("volume/etl/data_area.R")
+source("volume/etl/data_geoclass.R")
 
 # Main -------------------------------------------------------------------
 data_locations(grouped_by = "munic")
@@ -59,9 +60,9 @@ data_labor_CEMPRE_IBGE(grouped_by = "micro")
 # data_nationalAccounts_IBGE(grouped_by = "munic")
 data_nationalAccounts_IBGE(grouped_by = "micro")
 
-
-
-
+#
+data_geoclass(grouped_by = "munic")
+data_geoclass(grouped_by = "micro")
 
 
 
