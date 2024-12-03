@@ -38,7 +38,7 @@ data_education <- function(grouped_by="micro"){
   df_education <- dplyr::left_join(df_highereducation, df_lowereducation)
 
   df_education %>% 
-    rio::export(., "volume/data/curated_data/micro/df_education.csv")  
+    rio::export(., "volume/data/curated_data/micro/df_education_micro.csv")  
   
 
 }

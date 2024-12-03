@@ -23,7 +23,7 @@ data_imig <- function(grouped_by = "micro") {
       dplyr::arrange(desc(immigrants)) %>%
       suppressMessages() %>%
       suppressWarnings()
-    rio::export(df_imig, "volume/data/curated_data/munic/df_immigrants.csv")
+    rio::export(df_imig, "volume/data/curated_data/munic/df_immigrants_munic.csv")
   } else if (grouped_by == "micro") {
     df_imig <- readr::read_tsv("volume/data/clean_data/micro/tabela2145_imig_micro.tsv") %>%
       janitor::clean_names(.) %>%
@@ -33,7 +33,7 @@ data_imig <- function(grouped_by = "micro") {
       dplyr::arrange(desc(immigrants)) %>%
       suppressMessages() %>%
       suppressWarnings()
-    rio::export(df_imig, "volume/data/curated_data/micro/df_immigrants.csv")
+    rio::export(df_imig, "volume/data/curated_data/micro/df_immigrants_micro.csv")
   }
 }
 

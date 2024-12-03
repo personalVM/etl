@@ -61,7 +61,7 @@ data_distance <- function(grouped_by="micro"){
   
   df_shp$dist_coast <- as.numeric(distances_coast)
   
-  df_dcoast <- df_shp %>% 
+  df_distance <- df_shp %>% 
     st_drop_geometry(.) %>%
     as.data.frame(.) %>%
     select(cd_micro, dist_coast) %>%
@@ -75,7 +75,7 @@ data_distance <- function(grouped_by="micro"){
       is_coastal_200km = ifelse(dist_coast <= 200, 1, 0)
     )
   
-  rio::export(df_dcoast, "volume/data/curated_data/micro/df_dcoast_micro.csv")
+  rio::export(df_distance, "volume/data/curated_data/micro/df_distance_micro.csv")
   
 }
 

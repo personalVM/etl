@@ -8,11 +8,14 @@
 
 # Function PCI oec --------------------------------------------------------
 data_pci_oec <- function(use_backup=T){
+  
+  library(httr)
+  source("volume/etl/util_loadPackages.R")
 
-  # LOAD PCI - Product Complexity Index
+  # LOAD Phttr# LOAD PCI - Product Complexity Index
   if(use_backup==F){
     api_url <- "https://oec.world/api/olap-proxy/data.jsonrecords?cube=complexity_pci_a_hs96_hs4&drilldowns=HS4%2CPCI+Rank%2CYear&measures=PCI&parents=false&sparse=false"
-    response <- GET(api_url)
+    response <- httr::GET(api_url)
     if (status_code(response) == 200) {
       data <- content(response, "text", encoding = "UTF-8") %>%
         fromJSON(flatten = TRUE)
