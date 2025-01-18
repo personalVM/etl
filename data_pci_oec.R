@@ -9,6 +9,7 @@
 # Function PCI oec --------------------------------------------------------
 data_pci_oec <- function(use_backup=T){
   
+  library("rjson")
   library(httr)
   source("volume/etl/util_loadPackages.R")
 
@@ -25,7 +26,7 @@ data_pci_oec <- function(use_backup=T){
       print(paste("Failed to fetch data. Status code:", status_code(response)))
     }
   } else if (use_backup==F) {
-    pci_oec <- read_csv("volume/data/clean_data/pci_oec.csv")
+    pci_oec <- read_csv("volume/data/clean_data/pci_oec_clean.csv")
   }
   
   df_pci <- pci_oec %>% 
